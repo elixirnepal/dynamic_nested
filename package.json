@@ -5,6 +5,7 @@
   "main": "./static/dynamic_nested.js",
   "scripts": {
     "build": "webpack --mode production",
+    "watch": "webpack --watch",
     "test": "jest"
   },
   "author": "Felipe Renan",
@@ -15,9 +16,11 @@
     "@testing-library/jest-dom": "^4.1.2",
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.0.4",
     "expose-loader": "^0.7.5",
     "extract-text-webpack-plugin": "^3.0.2",
+    "html-webpack-plugin": "^3.2.0",
     "jest": "^24.9.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"

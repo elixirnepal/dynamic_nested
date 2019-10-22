@@ -35,7 +35,7 @@
  * ```JS
  * import DynamicNested from 'dynamic-nested'
  *
- * document.querySelectorAll('[dynamic-nested]').forEach(element => DynamicNested(element))
+ * document.querySelectorAll('[dynamic-nested]').forEach(element => new DynamicNested(element))
  * ```
  *
  * It supports the following callbacks:
@@ -98,25 +98,24 @@ class DynamicNested {
 
   add($allNested) {
     const $lastNested = $allNested[$allNested.length -1]
-
     if (this.options.beforeClone) { this.options.beforeClone($lastNested) }
 
     const $newNested  = $lastNested.cloneNode(true)
 
     // copy selected options from the cloned to the new nested since they are not copied when cloned.
-    $newNested.querySelectorAll('select').forEach((select, index) => {
-      const cloneSelect = $lastNested.querySelectorAll('select')[index]
+    // $newNested.querySelectorAll('select').forEach((select, index) => {
+    //   const cloneSelect = $lastNested.querySelectorAll('select')[index]
 
-      if(select.multiple) {
-        for(let option of select.options) {
-          const cloneSelectOption = Array.from(cloneSelect.options).find(o => o.value == option.value)
+    //   if(select.multiple) {
+    //     for(let option of select.options) {
+    //       const cloneSelectOption = Array.from(cloneSelect.options).find(o => o.value == option.value)
 
-          cloneSelectOption.selected
-        }
-      } else {
-        select.selectedIndex = cloneSelect.selectedIndex
-      }
-    })
+    //       cloneSelectOption.selected
+    //     }
+    //   } else {
+    //     select.selectedIndex = cloneSelect.selectedIndex
+    //   }
+    // })
 
     // When editing the form, the cloned element will have hidden ids. They must be removed from
     // the new element.
@@ -127,6 +126,10 @@ class DynamicNested {
     const index = +$lastNested.getAttribute('dynamic-nested-index') + 1
     this.replaceIndex($newNested, index)
 
+    // Clear value of cloned item
+    $newNested.querySelectorAll("input").forEach((el) => {
+      el.value = "";
+    });
     // Add new nested on the page.
     this.element.appendChild($newNested)
 

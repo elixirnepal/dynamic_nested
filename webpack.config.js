@@ -1,6 +1,9 @@
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
+  mode: "development",
   entry: './js/dynamic_nested.js',
   output: {
     filename: 'dynamic_nested.js',
@@ -8,6 +11,7 @@ module.exports = {
     library: 'dynamic_nested',
     libraryTarget: 'umd'
   },
+  devtool: 'inline-cheap-source-map',
   module: {
     rules: [
       {
@@ -26,5 +30,10 @@ module.exports = {
       }
     ]
   },
-  plugins: []
+  plugins: [
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'Development',
+    }),
+  ]
 }
