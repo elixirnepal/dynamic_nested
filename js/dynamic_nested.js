@@ -102,21 +102,6 @@ class DynamicNested {
 
     const $newNested  = $lastNested.cloneNode(true)
 
-    // copy selected options from the cloned to the new nested since they are not copied when cloned.
-    // $newNested.querySelectorAll('select').forEach((select, index) => {
-    //   const cloneSelect = $lastNested.querySelectorAll('select')[index]
-
-    //   if(select.multiple) {
-    //     for(let option of select.options) {
-    //       const cloneSelectOption = Array.from(cloneSelect.options).find(o => o.value == option.value)
-
-    //       cloneSelectOption.selected
-    //     }
-    //   } else {
-    //     select.selectedIndex = cloneSelect.selectedIndex
-    //   }
-    // })
-
     // When editing the form, the cloned element will have hidden ids. They must be removed from
     // the new element.
     const hiddenId = $newNested.querySelector('[dynamic-nested-field-id]')
@@ -127,9 +112,10 @@ class DynamicNested {
     this.replaceIndex($newNested, index)
 
     // Clear value of cloned item
-    $newNested.querySelectorAll("input").forEach((el) => {
-      el.value = "";
+    $newNested.querySelectorAll('input').forEach((el) => {
+      el.value = '';
     });
+    
     // Add new nested on the page.
     this.element.appendChild($newNested)
 

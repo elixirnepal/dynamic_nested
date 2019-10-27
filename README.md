@@ -36,7 +36,7 @@ Also, make sure to initialize this script after importing it on your application
 ```JS
 import DynamicNested from 'dynamic_nested'
 
-document.querySelectorAll('[dynamic-nested]').forEach(element => DynamicNested(element))
+document.querySelectorAll('[dynamic-nested]').forEach(element => new DynamicNested(element))
 ```
 
 It supports the following callbacks:
@@ -52,7 +52,7 @@ const afterRemove = (elements) => { ... }
 
 document
   .querySelectorAll('[dynamic-nested]')
-  .forEach(element => DynamicNested(element, { beforeClone, afterAdd, afterRemove }))
+  .forEach(element => new DynamicNested(element, { beforeClone, afterAdd, afterRemove }))
 ```
 
 Everytime a User adds a new row, it is going to generate a new index for that row incrementing
